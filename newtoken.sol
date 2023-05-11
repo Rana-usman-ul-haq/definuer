@@ -722,7 +722,7 @@ contract Defineur is Context, IERC20, Ownable {
     
     constructor() {
         _rOwned[owner()] = _rTotal;
-        //IUniswapV2Router02 _uniswapV2Router = IUniswapV2Router02(0xa5E0829CaCEd8fFDD4De3c43696c57F7D7A678ff); // Matic router address
+        //IUniswapV2Router02 _uniswapV2Router = IUniswapV2Router02(0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D); // Eth router address
         IUniswapV2Router02 _uniswapV2Router = IUniswapV2Router02(0x1b02dA8Cb0d097eB8D57A175b88c7D8b47997506); // Fantom router address
         // 0xbdd4e5660839a088573191A9889A262c0Efc0983 mumbai router
         
@@ -972,7 +972,9 @@ contract Defineur is Context, IERC20, Ownable {
             overMinTokenBalance &&
             !inSwapAndLiquify &&
             to == uniswapV2Pair &&
-            swapAndLiquifyEnabled
+            swapAndLiquifyEnabled &&
+            _marketingFee > 0 &&
+            _liquidityFee > 0
         ) {
             contractTokenBalance = numTokensSellToAddToLiquidity;
             //add liquidity and send bnb to marketing wallet
